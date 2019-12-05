@@ -58,7 +58,7 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
-    
+
     if(n < 0){
       n = Math.abs(n);
     }
@@ -80,19 +80,95 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
-};
 
+    var isNegative = false;
+
+    if(n < 0){
+        n = Math.abs(n);
+        isNegative = true;
+    }
+
+    if(n === 0){
+      return 0;
+    }
+    
+    if(isNegative === false){
+
+        return n-1 + sumBelow(n -1);
+    } else {
+
+        return -Math.abs(n-1 + sumBelow(n -1));
+    }
+    
+    };
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
-};
+    //create result array
+    
+
+    //should return an empty array if no integers in range
+    if(x === undefined || y === undefined){
+        return 0;
+    }
+    if(x === y || x + 1 === y){
+        return [];
+    }
+//here is the case when x is less than y
+ if(x < y){
+    if(x === y - 2){  
+  
+        return [x + 1];
+    
+      } else {
+    
+        var resultArray = range(x, y - 1);
+        resultArray.push(y - 1);
+    
+        return resultArray;
+      }
+
+    } else {
+
+        if(x === y + 2){  
+  
+            return [x - 1];
+        
+          } else {
+        
+            var resultArray = range(x, y + 1);
+            resultArray.push(y + 1);
+        
+            return resultArray;
+          }
+
+    }
+ 
+  
+  };
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
-// exponent(4,3); // 64
+// exponent(4,3); // 64   
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+
+    if(exp === 0){
+        return 1;
+    }
+
+    if(exp < 0){
+        
+       
+        return (1/base) * exponent(base, exp + 1).toFixed(4); // to fixed rounds to a specifc decimal point
+
+    } else {
+
+
+        return base * exponent(base, exp - 1); 
+    }
+    
 };
 
 // 8. Determine if a number is a power of two.
@@ -100,6 +176,15 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+    if(n === 1){
+        return true;
+    }
+
+    if(n < 1){
+        return false;
+    }
+
+    return powerOfTwo(n/2);
 };
 
 // 9. Write a function that reverses a string.
